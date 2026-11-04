@@ -3,7 +3,7 @@
 
 ## 👥 Team Information
 - **Project Name:** Neighborhood Surplus Food Market (*RescueBite*)
-- **Core Concept:** Local bakeries, grocery stores, and cafes sell end-of-day surplus food as discounted mystery/food packages. Customers in need order through the platform, orders are delivered by couriers, and delivery is validated via dynamic QR codes at the doorstep.
+- **Core Concept:** Local bakeries, grocery stores, and cafes sell end-of-day surplus food as discounted food delivery. Customers in need order through the platform, orders are delivered by couriers, and delivery is validated via dynamic QR codes at the doorstep.
 - **Team Number:** [Team 13]
 - **Academic Term:** 2025-2026 Academic Year
 - **GitHub Repository:** `https://github.com/[Organization-or-User]/rescuebite-surplus-food-market`
@@ -33,3 +33,4 @@
 - 📋 **GitHub Pull Request Template:** [`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md)
 - 🎫 **GitHub User Story Issue Template:** [`.github/ISSUE_TEMPLATE/user-story.md`](.github/ISSUE_TEMPLATE/user-story.md)
 - ⚖️ **Open-Source License:** [`LICENSE`](LICENSE) (Apache License 2.0)
+- 🧑‍💻 **Individual Contributions & GitHub Tracking:** [CONTRIBUTIONS.md](CONTRIBUTIONS.md)
