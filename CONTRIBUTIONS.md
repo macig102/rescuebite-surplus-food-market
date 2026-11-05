@@ -2,7 +2,7 @@
 
 This document outlines the individual contributions, GitHub tracking history, and official BM321 rubric responsibilities of each team member for the SENG 321 Sprint 1 deliverable.
 
----
+----
 
 ### 1. Zeynep Bozdemir (230203005)
 - **GitHub Username:** `zeynepbozdemirrr`
