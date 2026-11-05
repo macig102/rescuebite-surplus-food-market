@@ -12,7 +12,7 @@ assignees: ''
 - **So that:** [Achieve a tangible social impact or business value]
 
 ## 🎯 Target Domain Area & OpenAPI Endpoint
-- **Epic / Feature:** [Merchant Governance / Surplus Package Management / Order Reservation / Courier Dispatch]
+- **Epic / Feature:** [Merchant Governance / Surplus Food Listing Management / Order Reservation / Courier Dispatch]
 - **API Endpoint:** [e.g., `POST /orders`, `POST /deliveries/{id}/verify-qr`, `PATCH /admin/stores/{id}/approve`]
 
 ## ✅ Acceptance Criteria (Given / When / Then)
@@ -25,7 +25,7 @@ Then [Expected HTTP status code, state transition, and response body payload]
 ## ⚠️ Edge Cases & Concurrency Errors
 - [ ] 409 Conflict (Stock depletion / concurrent courier claim race)
 - [ ] 409 Conflict (Delivery time window expired / invalid QR code)
-- [ ] 403 Forbidden (Unapproved merchant attempting package creation)
+- [ ] 403 Forbidden (Unapproved merchant attempting listing creation)
 - [ ] 400 Bad Request (Invalid parameters or missing delivery address)
 
 ## ⏱️ Initial Effort Estimate (Story Points)
