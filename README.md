@@ -6,7 +6,7 @@
 - **Core Concept:** Local bakeries, grocery stores, and cafes sell end-of-day surplus food as discounted food delivery. Customers in need order through the platform, orders are delivered by couriers, and delivery is validated via dynamic QR codes at the doorstep.
 - **Team Number:** [Team 13]
 - **Academic Term:** 2025-2026 Academic Year
-- **GitHub Repository:** `https://github.com/[Organization-or-User]/rescuebite-surplus-food-market`
+- **GitHub Repository:** `https://github.com/[macig102]/rescuebite-surplus-food-market`
 - **Sprint 1 Release Tag:** `v0.1.0-sprint1`
 
 | Student ID | Full Name | Official Role Title (BM321 Rubric) | Primary Responsibility | Required Outputs & Tasks |
