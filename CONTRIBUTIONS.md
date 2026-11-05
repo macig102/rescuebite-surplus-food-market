@@ -5,7 +5,7 @@ This document outlines the individual contributions, GitHub tracking history, an
 ---
 
 ### 1. Zeynep Bozdemir (230203005)
-* **GitHub Username:** `@[Pending Member Username Confirmation]`
+* **GitHub Username:** `zeynepbozdemirrr`
 * **Project Role:** Product Owner and Requirements Engineer
 * **Primary Responsibilities & Contributions:**
   * Led requirements engineering and established the product vision for transparent surplus food listings.
@@ -14,12 +14,12 @@ This document outlines the individual contributions, GitHub tracking history, an
   * Owned requirements and scope definition for Food Waste Rescued Metrics (US-08).
 * **Traceability Links:**
   * **GitHub Issue:** [Issue #4 - Project Proposal & Requirements Definition](https://github.com/macig102/rescuebite-surplus-food-market/issues/4)
-  * **Pull Request & Commits:** Verified in repository history under `https://github.com/macig102/rescuebite-surplus-food-market` (Sprint 1 branch integration into `develop`).
+  * **Pull Request & Commits:** Verified in repository history under `https://github.com/macig102/rescuebite-surplus-food-market` (Branch integration via PR into `develop`).
 
 ---
 
 ### 2. Mehmet Kocagöz (220201035)
-* **GitHub Username:** `@mehmetkocagozz`
+* **GitHub Username:** `mehmetkocagozz`
 * **Project Role:** Lead Software Architect and Technical Lead
 * **Primary Responsibilities & Contributions:**
   * Designed the System Vision and Context Boundary diagram with external provider trust boundaries.
@@ -28,25 +28,25 @@ This document outlines the individual contributions, GitHub tracking history, an
   * Architected backend schemas and endpoints for Store Approval (US-01), Surplus Food Listing Creation with transparent items (US-02), Order Reservation with concurrency lock (US-04), Store Order Preparation Status Transitions, and Courier Claim (US-06).
 * **Traceability Links:**
   * **GitHub Issue:** [Issue #3 - OpenAPI 3.1.0 Contract & System Architecture](https://github.com/macig102/rescuebite-surplus-food-market/issues/3)
-  * **Pull Request & Commits:** Verified in repository history under `https://github.com/macig102/rescuebite-surplus-food-market` (Sprint 1 branch integration into `develop`).
+  * **Pull Request & Commits:** Verified in repository history under `https://github.com/macig102/rescuebite-surplus-food-market`.
 
 ---
 
 ### 3. Anıl Güngör (220205003)
-* **GitHub Username:** `@[Pending Member Username Confirmation]`
+* **GitHub Username:** `anlgr`
 * **Project Role:** Scrum Master and Agile Process Coach
 * **Primary Responsibilities & Contributions:**
   * Managed the Agile sprint cadence, stand-up coordination, and team communication workflows.
   * Established and administered the team GitHub Projects Kanban board tracking Sprint 1 backlog items.
   * Authored the team Roles breakdown and RACI Responsibility Matrix aligned with the official BM321 rubric.
 * **Traceability Links:**
-  * **GitHub Issue:** [Issue #2 - Agile Process, Roles & RACI Matrix Definition](https://github.com/macig102/rescuebite-surplus-food-market/issues/2)
-  * **Pull Request & Commits:** Verified in repository history under `https://github.com/macig102/rescuebite-surplus-food-market` (Sprint 1 branch integration into `develop`).
+  * **GitHub Issue:** [Issue #9 - Agile Sprint Board & RACI Administration](https://github.com/macig102/rescuebite-surplus-food-market/issues/9)
+  * **Pull Request & Commits:** Verified in repository history under `https://github.com/macig102/rescuebite-surplus-food-market`.
 
 ---
 
 ### 4. Tuğçe Ertem (230201047)
-* **GitHub Username:** `@[Pending Member Username Confirmation]`
+* **GitHub Username:** `tugceertem`
 * **Project Role:** Quality Assurance and Test Automation Engineer
 * **Primary Responsibilities & Contributions:**
   * Formulated rigorous, testable Acceptance Criteria using standard Gherkin Given-When-Then format across all user stories (US-01 through US-08).
@@ -55,12 +55,12 @@ This document outlines the individual contributions, GitHub tracking history, an
   * Executed the Sprint 1 Quality & Evidence Audit against the course submission checklist.
 * **Traceability Links:**
   * **GitHub Issue:** [Issue #6 - Acceptance Criteria & Quality Assurance Audit](https://github.com/macig102/rescuebite-surplus-food-market/issues/6)
-  * **Pull Request & Commits:** Verified in repository history under `https://github.com/macig102/rescuebite-surplus-food-market` (Sprint 1 branch integration into `develop`).
+  * **Pull Request & Commits:** Verified in repository history under `https://github.com/macig102/rescuebite-surplus-food-market`.
 
 ---
 
 ### 5. Azra Dostbil (230204031)
-* **GitHub Username:** `@[Pending Member Username Confirmation]`
+* **GitHub Username:** `azradostbil`
 * **Project Role:** DevOps and CI/CD Infrastructure Engineer
 * **Primary Responsibilities & Contributions:**
   * Established Lightweight Git-Flow branching guidelines, branch protection rulesets, and GitHub Issue and Pull Request templates.
@@ -68,24 +68,4 @@ This document outlines the individual contributions, GitHub tracking history, an
   * Managed Sprint 1 release packaging and version tagging workflow (`v0.1.0-sprint1`).
   * Prepared initial repository infrastructure for future CI/CD pipeline integration.
 * **Traceability Links:**
-  * **GitHub Issue:** [Issue #5 - Git-Flow Policy, Repository Governance & Templates](https://github.com/macig102/rescuebite-surplus-food-market/issues/5)
-  * **Pull Request & Commits:** Verified in repository history under `https://github.com/macig102/rescuebite-surplus-food-market` (Sprint 1 branch integration into `develop`).
-
----
-
-### 6. Muhammed Fatih Ağaç (230201009)
-* **GitHub Username:** `@macig102` (Repository Owner)
-* **Project Role:** Implementation and Integration Engineer
-* **Primary Responsibilities & Contributions:**
-  * Coordinated cross-component integration, repository setup, and artifact consistency across deliverables.
-  * Designed interface contracts and UI interaction specifications for Transparent Surplus Listing Discovery (US-03) and Customer Dynamic QR Generation (US-05).
-  * Ensured strict alignment between OpenAPI endpoints and frontend client expectations.
-  * Supported technical documentation and report consolidation.
-* **Traceability Links:**
-  * **GitHub Issue:** [Issue #7 - Integration Engineering & UI/API Coordination](https://github.com/macig102/rescuebite-surplus-food-market/issues/7)
-  * **Pull Request & Commits:** Verified in repository history under `https://github.com/macig102/rescuebite-surplus-food-market` (Sprint 1 branch integration into `develop`).
-
----
-
-> **Note on Verification Evidence:**  
-> In compliance with academic integrity guidelines, placeholder links (`#XX`, `commit-hash`) have been purged. Live commit trees and merged PR records are retained directly in GitHub repository logs under `https://github.com/macig102/rescuebite-surplus-food-market`. Team members will fill in their respective personal GitHub handles if distinct from repository contributors.
+  * **GitHub Issue:** [Issue #5 - Git-Flow Policy, Repository Governance & Templates](
