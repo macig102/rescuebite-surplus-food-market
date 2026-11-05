@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
-  title: Neighborhood Surplus Food Market API (RescueBite)
-  version: 0.1.0
+  title: "Neighborhood Surplus Food Market API (RescueBite)"
+  version: "0.1.0"
   description: >
     Core RESTful API contract for the Neighborhood Surplus Food Market platform.
     Enables local bakeries, cafes, and grocery stores to list end-of-day surplus food items
@@ -12,76 +12,76 @@ info:
     verifies doorstep handover via dynamic single-use QR tokens, and tracks cumulative food waste diversion metrics.
     SENG 321 Software Engineering Project Sprint 1 API-first specification.
 servers:
-  - url: https://api.rescuebite.local/v1
-    description: Local development and sandbox mock server
+  - url: "https://api.rescuebite.local/v1"
+    description: "Local development and sandbox mock server"
 paths:
   /listings:
     get:
-      summary: List available surplus food listings
+      summary: "List available surplus food listings"
       description: >
         Retrieves active surplus food listings filtered by geolocation coordinates, radius, food category,
         and dietary preferences. Every listing itemizes its contents and quantities so customers know exactly
         what they are purchasing.
-      operationId: listAvailableListings
+      operationId: "listAvailableListings"
       tags:
-        - Listings
+        - "Listings"
       parameters:
-        - name: latitude
-          in: query
+        - name: "latitude"
+          in: "query"
           required: false
           schema:
-            type: number
-            format: double
+            type: "number"
+            format: "double"
           example: 41.0082
-        - name: longitude
-          in: query
+        - name: "longitude"
+          in: "query"
           required: false
           schema:
-            type: number
-            format: double
+            type: "number"
+            format: "double"
           example: 28.9784
-        - name: radiusKm
-          in: query
+        - name: "radiusKm"
+          in: "query"
           required: false
           schema:
-            type: integer
+            type: "integer"
             default: 5
           example: 3
-        - name: category
-          in: query
+        - name: "category"
+          in: "query"
           required: false
           schema:
-            type: string
+            type: "string"
             enum: [BAKERY, MEALS, GROCERY, CAFE, ALL]
             default: ALL
-        - name: dietaryPreference
-          in: query
+        - name: "dietaryPreference"
+          in: "query"
           required: false
           schema:
-            type: string
+            type: "string"
             enum: [ALL, VEGAN, VEGETARIAN, GLUTEN_FREE, HALAL, DAIRY_FREE]
             default: ALL
       responses:
         '200':
-          description: List of active surplus food listings with transparent items
+          description: "List of active surplus food listings with transparent items"
           content:
             application/json:
               schema:
-                type: array
+                type: "array"
                 items:
                   $ref: '#/components/schemas/SurplusFoodListing'
         '400':
           $ref: '#/components/responses/BadRequest'
 
     post:
-      summary: Create new surplus food listing (Approved Store)
+      summary: "Create new surplus food listing (Approved Store)"
       description: >
         Allows a verified merchant to list an end-of-day surplus food batch.
         The merchant must explicitly define the itemized contents, portions, allergens,
         total available listing quantity, and delivery time window.
-      operationId: createListing
+      operationId: "createListing"
       tags:
-        - Listings
+        - "Listings"
       security:
         - BearerAuth: []
       requestBody:
@@ -92,7 +92,7 @@ paths:
               $ref: '#/components/schemas/NewSurplusFoodListing'
       responses:
         '201':
-          description: Surplus food listing successfully created and published
+          description: "Surplus food listing successfully created and published"
           content:
             application/json:
               schema:
@@ -102,36 +102,36 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
-          description: Store is unverified or lacks merchant permissions
+          description: "Store is unverified or lacks merchant permissions"
           content:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
               example:
-                title: Store Not Approved
+                title: "Store Not Approved"
                 status: 403
-                code: STORE_NOT_APPROVED
-                detail: Merchant account must be approved by an administrator before creating surplus food listings.
+                code: "STORE_NOT_APPROVED"
+                detail: "Merchant account must be approved by an administrator before creating surplus food listings."
 
   /listings/{listingId}:
     get:
-      summary: Get surplus food listing details
+      summary: "Get surplus food listing details"
       description: >
         Returns complete listing details including the transparent list of individual food items,
         quantities, allergen alerts, prices, and delivery time window.
-      operationId: getListingById
+      operationId: "getListingById"
       tags:
-        - Listings
+        - "Listings"
       parameters:
-        - name: listingId
-          in: path
+        - name: "listingId"
+          in: "path"
           required: true
           schema:
-            type: string
-          example: LST-2026-0042
+            type: "string"
+          example: "LST-2026-0042"
       responses:
         '200':
-          description: Listing details and transparent food items breakdown
+          description: "Listing details and transparent food items breakdown"
           content:
             application/json:
               schema:
@@ -141,15 +141,15 @@ paths:
 
   /orders:
     post:
-      summary: Place order for a surplus food listing (Customer)
+      summary: "Place order for a surplus food listing (Customer)"
       description: >
         Customer reserves a surplus food listing with doorstep delivery.
         Stock is reserved atomically. If the remaining available listing quantity is depleted
         by a concurrent request, an HTTP 409 Conflict (LISTING_SOLD_OUT) is returned.
         Payment authorization is simulated via a sandbox payment token.
-      operationId: createOrder
+      operationId: "createOrder"
       tags:
-        - Orders
+        - "Orders"
       security:
         - BearerAuth: []
       requestBody:
@@ -160,7 +160,7 @@ paths:
               $ref: '#/components/schemas/NewOrder'
       responses:
         '201':
-          description: Order placed, queued for store preparation, and dynamic delivery QR token generated
+          description: "Order placed, queued for store preparation, and dynamic delivery QR token generated"
           content:
             application/json:
               schema:
@@ -170,48 +170,48 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
         '409':
-          description: Requested listing is sold out, payment failed, or conflicted by concurrent purchase
+          description: "Requested listing is sold out, payment failed, or conflicted by concurrent purchase"
           content:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
               examples:
                 listingSoldOut:
-                  summary: Listing sold out
+                  summary: "Listing sold out"
                   value:
-                    title: Listing Sold Out
+                    title: "Listing Sold Out"
                     status: 409
-                    code: LISTING_SOLD_OUT
-                    detail: The selected surplus food listing is sold out or the last unit was claimed by another customer.
+                    code: "LISTING_SOLD_OUT"
+                    detail: "The selected surplus food listing is sold out or the last unit was claimed by another customer."
                 paymentFailed:
-                  summary: Payment authorization failed
+                  summary: "Payment authorization failed"
                   value:
-                    title: Payment Authorization Failed
+                    title: "Payment Authorization Failed"
                     status: 409
-                    code: PAYMENT_AUTHORIZATION_FAILED
-                    detail: The payment gateway rejected the transaction token. The order was not created.
+                    code: "PAYMENT_AUTHORIZATION_FAILED"
+                    detail: "The payment gateway rejected the transaction token. The order was not created."
 
   /orders/{orderId}:
     get:
-      summary: Get order details and delivery verification QR token
+      summary: "Get order details and delivery verification QR token"
       description: >
         Retrieves order information, status lifecycle milestone, assigned courier,
         and the customer dynamic delivery QR token for doorstep handover verification.
-      operationId: getOrderById
+      operationId: "getOrderById"
       tags:
-        - Orders
+        - "Orders"
       security:
         - BearerAuth: []
       parameters:
-        - name: orderId
-          in: path
+        - name: "orderId"
+          in: "path"
           required: true
           schema:
-            type: string
-          example: ORD-2026-9812
+            type: "string"
+          example: "ORD-2026-9812"
       responses:
         '200':
-          description: Order details, courier status, and customer delivery QR token
+          description: "Order details, courier status, and customer delivery QR token"
           content:
             application/json:
               schema:
@@ -223,23 +223,23 @@ paths:
 
   /orders/{orderId}/status:
     patch:
-      summary: Update order preparation status (Store)
+      summary: "Update order preparation status (Store)"
       description: >
         Allows the authenticated merchant to update the preparation state of an order.
         Valid transitions are PLACED -> PREPARING and PREPARING -> READY_FOR_COURIER.
         Once an order reaches READY_FOR_COURIER, it becomes available in the courier delivery pool.
-      operationId: updateOrderStatus
+      operationId: "updateOrderStatus"
       tags:
-        - Orders
+        - "Orders"
       security:
         - BearerAuth: []
       parameters:
-        - name: orderId
-          in: path
+        - name: "orderId"
+          in: "path"
           required: true
           schema:
-            type: string
-          example: ORD-2026-9812
+            type: "string"
+          example: "ORD-2026-9812"
       requestBody:
         required: true
         content:
@@ -248,7 +248,7 @@ paths:
               $ref: '#/components/schemas/OrderStatusUpdate'
       responses:
         '200':
-          description: Order status successfully transitioned
+          description: "Order status successfully transitioned"
           content:
             application/json:
               schema:
@@ -258,57 +258,57 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
-          description: Caller is not the merchant that owns this order
+          description: "Caller is not the merchant that owns this order"
           content:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
               example:
-                title: Forbidden Store Action
+                title: "Forbidden Store Action"
                 status: 403
-                code: FORBIDDEN_STORE_ACTION
-                detail: Only the merchant fulfilling this order is authorized to update its preparation status.
+                code: "FORBIDDEN_STORE_ACTION"
+                detail: "Only the merchant fulfilling this order is authorized to update its preparation status."
         '404':
           $ref: '#/components/responses/NotFound'
         '409':
-          description: Invalid order status transition sequence
+          description: "Invalid order status transition sequence"
           content:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
               example:
-                title: Invalid Status Transition
+                title: "Invalid Status Transition"
                 status: 409
-                code: INVALID_STATUS_TRANSITION
-                detail: Cannot transition order from PLACED directly to READY_FOR_COURIER without PREPARING.
+                code: "INVALID_STATUS_TRANSITION"
+                detail: "Cannot transition order from PLACED directly to READY_FOR_COURIER without PREPARING."
 
   /deliveries/available:
     get:
-      summary: List available deliveries for couriers
-      description: Lists orders that have reached READY_FOR_COURIER status and are awaiting courier pickup.
-      operationId: listAvailableDeliveries
+      summary: "List available deliveries for couriers"
+      description: "Lists orders that have reached READY_FOR_COURIER status and are awaiting courier pickup."
+      operationId: "listAvailableDeliveries"
       tags:
-        - Deliveries
+        - "Deliveries"
       security:
         - BearerAuth: []
       parameters:
-        - name: latitude
-          in: query
+        - name: "latitude"
+          in: "query"
           required: true
           schema:
-            type: number
-            format: double
+            type: "number"
+            format: "double"
           example: 40.9856
-        - name: longitude
-          in: query
+        - name: "longitude"
+          in: "query"
           required: true
           schema:
-            type: number
-            format: double
+            type: "number"
+            format: "double"
           example: 29.0289
       responses:
         '200':
-          description: List of orders ready for courier pickup and delivery
+          description: "List of orders ready for courier pickup and delivery"
           content:
             application/json:
               schema:
@@ -320,25 +320,25 @@ paths:
 
   /deliveries/{orderId}/claim:
     post:
-      summary: Courier claims a delivery order
+      summary: "Courier claims a delivery order"
       description: >
         Courier assigns the delivery to themselves. Transitions order from READY_FOR_COURIER
         to IN_DELIVERY. If claimed concurrently by another courier, returns HTTP 409 Conflict.
-      operationId: claimDelivery
+      operationId: "claimDelivery"
       tags:
-        - Deliveries
+        - "Deliveries"
       security:
         - BearerAuth: []
       parameters:
-        - name: orderId
-          in: path
+        - name: "orderId"
+          in: "path"
           required: true
           schema:
-            type: string
-          example: ORD-2026-9812
+            type: "string"
+          example: "ORD-2026-9812"
       responses:
         '200':
-          description: Order successfully claimed and transitioned to IN_DELIVERY
+          description: "Order successfully claimed and transitioned to IN_DELIVERY"
           content:
             application/json:
               schema:
@@ -348,36 +348,36 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
         '409':
-          description: Order already claimed by another courier
+          description: "Order already claimed by another courier"
           content:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
               example:
-                title: Delivery Already Claimed
+                title: "Delivery Already Claimed"
                 status: 409
-                code: DELIVERY_ALREADY_CLAIMED
-                detail: This delivery was already assigned to another courier moments ago.
+                code: "DELIVERY_ALREADY_CLAIMED"
+                detail: "This delivery was already assigned to another courier moments ago."
 
   /deliveries/{orderId}/verify-qr:
     post:
-      summary: Verify doorstep delivery via customer dynamic QR token (Courier)
+      summary: "Verify doorstep delivery via customer dynamic QR token (Courier)"
       description: >
         The courier scans the customer dynamic QR code upon arrival at the delivery address.
         The token is validated for authenticity, single-use, and active delivery time window.
         On success, order transitions to DELIVERED, deliveredAt is set, and rescued food weight is recorded.
-      operationId: verifyDeliveryQR
+      operationId: "verifyDeliveryQR"
       tags:
-        - Deliveries
+        - "Deliveries"
       security:
         - BearerAuth: []
       parameters:
-        - name: orderId
-          in: path
+        - name: "orderId"
+          in: "path"
           required: true
           schema:
-            type: string
-          example: ORD-2026-9812
+            type: "string"
+          example: "ORD-2026-9812"
       requestBody:
         required: true
         content:
@@ -386,7 +386,7 @@ paths:
               $ref: '#/components/schemas/QRVerificationRequest'
       responses:
         '200':
-          description: Delivery QR validated and order completed
+          description: "Delivery QR validated and order completed"
           content:
             application/json:
               schema:
@@ -396,56 +396,56 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
-          description: Caller is not the assigned courier for this delivery
+          description: "Caller is not the assigned courier for this delivery"
           content:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
               example:
-                title: Unauthorized Courier Verification
+                title: "Unauthorized Courier Verification"
                 status: 403
-                code: UNAUTHORIZED_COURIER
-                detail: Only the courier assigned to this delivery can submit the verification token.
+                code: "UNAUTHORIZED_COURIER"
+                detail: "Only the courier assigned to this delivery can submit the verification token."
         '404':
           $ref: '#/components/responses/NotFound'
         '409':
-          description: Invalid QR token, token already redeemed, or expired delivery window
+          description: "Invalid QR token, token already redeemed, or expired delivery window"
           content:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
               examples:
                 invalidOrUsedQr:
-                  summary: Invalid or already used QR token
+                  summary: "Invalid or already used QR token"
                   value:
-                    title: Invalid Delivery Verification
+                    title: "Invalid Delivery Verification"
                     status: 409
-                    code: INVALID_QR_VERIFICATION
-                    detail: The scanned QR token is invalid, cryptographically mismatched, or has already been redeemed.
+                    code: "INVALID_QR_VERIFICATION"
+                    detail: "The scanned QR token is invalid, cryptographically mismatched, or has already been redeemed."
                 expiredWindow:
-                  summary: Expired delivery window
+                  summary: "Expired delivery window"
                   value:
-                    title: Expired Delivery Window
+                    title: "Expired Delivery Window"
                     status: 409
-                    code: EXPIRED_DELIVERY_WINDOW
-                    detail: The scheduled delivery time window for this order has already passed.
+                    code: "EXPIRED_DELIVERY_WINDOW"
+                    detail: "The scheduled delivery time window for this order has already passed."
 
   /admin/stores/{storeId}/approve:
     patch:
-      summary: Approve or suspend store registration (Platform Admin)
-      description: Administrator inspects merchant food hygiene licenses and registration documents and updates approval status.
-      operationId: updateStoreApproval
+      summary: "Approve or suspend store registration (Platform Admin)"
+      description: "Administrator inspects merchant food hygiene licenses and registration documents and updates approval status."
+      operationId: "updateStoreApproval"
       tags:
-        - Admin
+        - "Admin"
       security:
         - BearerAuth: []
       parameters:
-        - name: storeId
-          in: path
+        - name: "storeId"
+          in: "path"
           required: true
           schema:
-            type: string
-          example: STR-34-KADIKOY
+            type: "string"
+          example: "STR-34-KADIKOY"
       requestBody:
         required: true
         content:
@@ -459,10 +459,10 @@ paths:
                   example: true
                 adminNotes:
                   type: string
-                  example: Merchant hygiene license verified and approved for surplus food listing operations.
+                  example: "Merchant hygiene license verified and approved for surplus food listing operations."
       responses:
         '200':
-          description: Merchant approval status successfully updated
+          description: "Merchant approval status successfully updated"
           content:
             application/json:
               schema:
@@ -478,16 +478,16 @@ paths:
 
   /metrics/food-waste:
     get:
-      summary: Cumulative food waste rescue metrics
+      summary: "Cumulative food waste rescue metrics"
       description: >
         Aggregates environmental impact statistics across all completed orders with status DELIVERED.
         Cancelled, refunded, or unfulfilled orders are strictly excluded from rescued food calculations.
-      operationId: getFoodWasteMetrics
+      operationId: "getFoodWasteMetrics"
       tags:
-        - Metrics
+        - "Metrics"
       responses:
         '200':
-          description: Food waste prevention and environmental impact metrics
+          description: "Food waste prevention and environmental impact metrics"
           content:
             application/json:
               schema:
@@ -511,16 +511,16 @@ components:
       properties:
         storeId:
           type: string
-          example: STR-34-KADIKOY
+          example: "STR-34-KADIKOY"
         storeName:
           type: string
-          example: Kadikoy Artisan Bakery
+          example: "Kadikoy Artisan Bakery"
         category:
           type: string
-          example: BAKERY
+          example: "BAKERY"
         address:
           type: string
-          example: 12 Sair Nefi Street, Kadikoy, Istanbul
+          example: "12 Sair Nefi Street, Kadikoy, Istanbul"
         latitude:
           type: number
           example: 40.9856
@@ -533,7 +533,7 @@ components:
 
     ListingItem:
       type: object
-      description: Individual food item explicitly listed within a surplus food listing
+      description: "Individual food item explicitly listed within a surplus food listing"
       required:
         - itemId
         - itemName
@@ -543,17 +543,17 @@ components:
       properties:
         itemId:
           type: string
-          example: ITM-01
+          example: "ITM-01"
         itemName:
           type: string
-          example: Artisan Sourdough Bread
+          example: "Artisan Sourdough Bread"
         quantity:
           type: integer
           minimum: 1
           example: 2
         unit:
           type: string
-          example: loaf
+          example: "loaf"
         allergens:
           type: array
           items:
@@ -561,11 +561,11 @@ components:
           example: [gluten]
         description:
           type: string
-          example: Naturally leavened sourdough bread baked this morning.
+          example: "Naturally leavened sourdough bread baked this morning."
 
     NewListingItem:
       type: object
-      description: Specification of an individual food item to include in a new listing
+      description: "Specification of an individual food item to include in a new listing"
       required:
         - itemName
         - quantity
@@ -574,14 +574,14 @@ components:
       properties:
         itemName:
           type: string
-          example: Butter Croissant
+          example: "Butter Croissant"
         quantity:
           type: integer
           minimum: 1
           example: 3
         unit:
           type: string
-          example: piece
+          example: "piece"
         allergens:
           type: array
           items:
@@ -589,7 +589,7 @@ components:
           example: [gluten, dairy]
         description:
           type: string
-          example: Fresh flaky butter croissants.
+          example: "Fresh flaky butter croissants."
 
     SurplusFoodListing:
       type: object
@@ -612,19 +612,19 @@ components:
       properties:
         listingId:
           type: string
-          example: LST-2026-0042
+          example: "LST-2026-0042"
         store:
           $ref: '#/components/schemas/StoreSummary'
         title:
           type: string
-          example: Evening Bakery Surplus: 2 Sourdough Loaves & 3 Butter Croissants
+          example: "Evening Bakery Surplus: 2 Sourdough Loaves & 3 Butter Croissants"
         category:
           type: string
           enum: [BAKERY, MEALS, GROCERY, CAFE]
-          example: BAKERY
+          example: "BAKERY"
         description:
           type: string
-          example: Transparent end-of-day surplus listing containing freshly baked loaves and artisan butter croissants.
+          example: "Transparent end-of-day surplus listing containing freshly baked loaves and artisan butter croissants."
         originalPrice:
           type: number
           format: float
@@ -635,13 +635,13 @@ components:
           example: 80.00
         availableListingQuantity:
           type: integer
-          description: Total number of these identical surplus food listing bundles available for purchase
+          description: "Total number of these identical surplus food listing bundles available for purchase"
           minimum: 0
           example: 5
         estimatedWeightKg:
           type: number
           format: float
-          description: Estimated total weight of all items in this listing bundle
+          description: "Estimated total weight of all items in this listing bundle"
           example: 1.5
         deliveryStart:
           type: string
@@ -659,16 +659,16 @@ components:
         status:
           type: string
           enum: [AVAILABLE, SOLD_OUT, EXPIRED]
-          example: AVAILABLE
+          example: "AVAILABLE"
         items:
           type: array
-          description: Transparent, itemized food contents of this listing
+          description: "Transparent, itemized food contents of this listing"
           items:
             $ref: '#/components/schemas/ListingItem'
 
     NewSurplusFoodListing:
       type: object
-      description: Merchant creation payload for an open, itemized surplus food listing
+      description: "Merchant creation payload for an open, itemized surplus food listing"
       required:
         - title
         - category
@@ -682,14 +682,14 @@ components:
       properties:
         title:
           type: string
-          example: Evening Bakery Surplus: 2 Sourdough Loaves & 3 Butter Croissants
+          example: "Evening Bakery Surplus: 2 Sourdough Loaves & 3 Butter Croissants"
         category:
           type: string
           enum: [BAKERY, MEALS, GROCERY, CAFE]
-          example: BAKERY
+          example: "BAKERY"
         description:
           type: string
-          example: Surplus daily production items packaged for evening doorstep delivery.
+          example: "Surplus daily production items packaged for evening doorstep delivery."
         originalPrice:
           type: number
           format: float
@@ -700,7 +700,7 @@ components:
           example: 80.00
         initialListingQuantity:
           type: integer
-          description: Total number of identical listing units being offered
+          description: "Total number of identical listing units being offered"
           minimum: 1
           example: 5
         estimatedWeightKg:
@@ -722,14 +722,14 @@ components:
           example: [VEGETARIAN]
         items:
           type: array
-          description: Transparent breakdown of food items and quantities
+          description: "Transparent breakdown of food items and quantities"
           minItems: 1
           items:
             $ref: '#/components/schemas/NewListingItem'
 
     NewOrder:
       type: object
-      description: Customer checkout request reserving one or more units of a specific surplus food listing
+      description: "Customer checkout request reserving one or more units of a specific surplus food listing"
       required:
         - listingId
         - quantity
@@ -738,11 +738,11 @@ components:
       properties:
         listingId:
           type: string
-          description: Identifier of the surplus food listing being ordered
-          example: LST-2026-0042
+          description: "Identifier of the surplus food listing being ordered"
+          example: "LST-2026-0042"
         quantity:
           type: integer
-          description: Number of listing units purchased by the customer
+          description: "Number of listing units purchased by the customer"
           minimum: 1
           maximum: 5
           example: 1
@@ -752,26 +752,26 @@ components:
           properties:
             street:
               type: string
-              example: Moda Avenue
+              example: "Moda Avenue"
             buildingNo:
               type: string
-              example: '45/3'
+              example: "45/3"
             district:
               type: string
-              example: Kadikoy
+              example: "Kadikoy"
             city:
               type: string
-              example: Istanbul
+              example: "Istanbul"
             fullAddress:
               type: string
-              example: 45 Moda Avenue, Apt 3, Kadikoy, Istanbul
+              example: "45 Moda Avenue, Apt 3, Kadikoy, Istanbul"
             deliveryInstructions:
               type: string
-              example: Please do not ring the doorbell.
+              example: "Please do not ring the doorbell."
         paymentToken:
           type: string
-          description: Mock payment token from sandbox payment gateway
-          example: pay_tok_sand_982394_visa
+          description: "Mock payment token from sandbox payment gateway"
+          example: "pay_tok_sand_982394_visa"
 
     OrderStatusUpdate:
       type: object
@@ -781,14 +781,14 @@ components:
         status:
           type: string
           enum: [PREPARING, READY_FOR_COURIER]
-          example: PREPARING
+          example: "PREPARING"
         notes:
           type: string
-          example: Items packed and sealed in tamper-evident paper bags.
+          example: "Items packed and sealed in tamper-evident paper bags."
 
     Order:
       type: object
-      description: Comprehensive representation of an order across its lifecycle
+      description: "Comprehensive representation of an order across its lifecycle"
       required:
         - orderId
         - listingId
@@ -807,20 +807,20 @@ components:
       properties:
         orderId:
           type: string
-          example: ORD-2026-9812
+          example: "ORD-2026-9812"
         listingId:
           type: string
-          example: LST-2026-0042
+          example: "LST-2026-0042"
         listingTitle:
           type: string
-          example: Evening Bakery Surplus: 2 Sourdough Loaves & 3 Butter Croissants
+          example: "Evening Bakery Surplus: 2 Sourdough Loaves & 3 Butter Croissants"
         customerId:
           type: string
-          example: CUST-7741
+          example: "CUST-7741"
         courierId:
           type: string
           nullable: true
-          example: CR-18
+          example: "CR-18"
         store:
           $ref: '#/components/schemas/StoreSummary'
         quantity:
@@ -828,7 +828,7 @@ components:
           example: 1
         items:
           type: array
-          description: Transparent itemized food contents confirmed in the order
+          description: "Transparent itemized food contents confirmed in the order"
           items:
             $ref: '#/components/schemas/ListingItem'
         totalPrice:
@@ -842,7 +842,7 @@ components:
         status:
           type: string
           enum: [PLACED, PREPARING, READY_FOR_COURIER, IN_DELIVERY, DELIVERED, CANCELLED]
-          example: PLACED
+          example: "PLACED"
         deliveryStart:
           type: string
           format: date-time
@@ -853,8 +853,8 @@ components:
           example: '2026-11-02T21:30:00Z'
         deliveryQrToken:
           type: string
-          description: Single-use cryptographic token presented by customer at doorstep for proof of delivery
-          example: QR-SEC-9812-VERIFY-HASH
+          description: "Single-use cryptographic token presented by customer at doorstep for proof of delivery"
+          example: "QR-SEC-9812-VERIFY-HASH"
         deliveredAt:
           type: string
           format: date-time
@@ -872,12 +872,12 @@ components:
       properties:
         deliveryQrToken:
           type: string
-          description: Scanned single-use delivery verification QR token from the customer screen
-          example: QR-SEC-9812-VERIFY-HASH
+          description: "Scanned single-use delivery verification QR token from the customer screen"
+          example: "QR-SEC-9812-VERIFY-HASH"
 
     FoodWasteMetrics:
       type: object
-      description: Aggregated ecological impact statistics derived exclusively from DELIVERED orders
+      description: "Aggregated ecological impact statistics derived exclusively from DELIVERED orders"
       required:
         - totalRescuedWeightKg
         - totalDeliveredOrders
@@ -888,20 +888,20 @@ components:
         totalRescuedWeightKg:
           type: number
           format: float
-          description: Cumulative kilograms of surplus food diverted from waste
+          description: "Cumulative kilograms of surplus food diverted from waste"
           example: 642.5
         totalDeliveredOrders:
           type: integer
-          description: Count of successfully completed deliveries
+          description: "Count of successfully completed deliveries"
           example: 418
         totalListingsRescued:
           type: integer
-          description: Total number of surplus listing bundles purchased and delivered
+          description: "Total number of surplus listing bundles purchased and delivered"
           example: 450
         co2EmissionsPreventedKg:
           type: number
           format: float
-          description: Estimated greenhouse gas emissions averted (approx. 2.5 kg CO2e per kg food saved)
+          description: "Estimated greenhouse gas emissions averted (approx. 2.5 kg CO2e per kg food saved)"
           example: 1606.25
         calculatedAt:
           type: string
@@ -910,7 +910,7 @@ components:
 
     Problem:
       type: object
-      description: RFC 7807 and RFC 9457 compliant error problem detail
+      description: "RFC 7807 and RFC 9457 compliant error problem detail"
       required:
         - title
         - status
@@ -919,41 +919,41 @@ components:
       properties:
         title:
           type: string
-          example: Request Failed
+          example: "Request Failed"
         status:
           type: integer
           example: 400
         code:
           type: string
-          example: VALIDATION_ERROR
+          example: "VALIDATION_ERROR"
         detail:
           type: string
-          example: Business rule validation failed or conflict detected.
+          example: "Business rule validation failed or conflict detected."
 
   responses:
     BadRequest:
-      description: Invalid query parameters or request body schema
+      description: "Invalid query parameters or request body schema"
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/Problem'
 
     Unauthorized:
-      description: Authentication failed or bearer token missing
+      description: "Authentication failed or bearer token missing"
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/Problem'
 
     Forbidden:
-      description: Insufficient role permissions or unverified store
+      description: "Insufficient role permissions or unverified store"
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/Problem'
 
     NotFound:
-      description: Requested resource was not found
+      description: "Requested resource was not found"
       content:
         application/problem+json:
           schema:
