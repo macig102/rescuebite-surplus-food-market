@@ -1,4 +1,4 @@
-# 👥 Team 13 - Sprint 1 Individual Contributions
+# 👥 Team 13- Sprint 1 Individual Contributions
 
 This document outlines the individual contributions, GitHub tracking history, and official BM321 rubric responsibilities of each team member for the SENG 321 Sprint 1 deliverable.
 
